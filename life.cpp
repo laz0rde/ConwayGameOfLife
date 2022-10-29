@@ -7,6 +7,7 @@ void Life::initialize() {
 	Post:	The life object will be initialized with the first configuration by the user
 	*/
 
+
 	int row, col;
 	for (row = 0; row <= maxrow + 1; row++)
 		for (col = 0; col <= maxcol + 1; col++)
@@ -14,6 +15,9 @@ void Life::initialize() {
 	
 	cout << "Initialize the Life object with Coordinates" << endl;
 	cout << "Terminate the Loop with special pair -1 -1" << endl;
+
+	//This for statically putting coordinate points
+	/*
 
 	cin >> row >> col;
 	while (row != -1 || col != -1) {
@@ -26,6 +30,24 @@ void Life::initialize() {
 			cout << "Row" << row << " out of range" << endl;
 
 		cin >> row >> col;
+	}
+	*/
+
+	// This for dynamically putting the coordinate yourself
+	// x for alive cell and . for dead cell, - to end up a line
+	int row_count = 1;
+	string seq;
+	while (row_count <= maxrow) {
+		cin >> seq;
+		if (seq.back() == '-') {
+			for (int i = 0; i < seq.length(); i++) {
+				if (seq[i] == 'x') {
+					grid[row_count][i+1] = 1;
+				}
+			}
+		}
+		row_count++;
+		seq.clear();
 	}
 };
 
@@ -99,3 +121,4 @@ void instructions() {
 	cout << "This game uses a grid size of " << maxrow << " and " << maxcol << " in which" << endl;
 	cout << "The occupied cells change from generation to generation according to the number of neighboring cells" << endl;
 }
+
