@@ -33,21 +33,51 @@ void Life::initialize() {
 	}
 	*/
 
+
 	// This for dynamically putting the coordinate yourself
 	// x for alive cell and . for dead cell, - to end up a line
+	int choice;
+	cout << "1 to setup cors dynaically, 2 to get from a file" << endl;
 	int row_count = 1;
-	string seq;
-	while (row_count <= maxrow) {
-		cin >> seq;
-		if (seq.back() == '-') {
-			for (int i = 0; i < seq.length(); i++) {
-				if (seq[i] == 'x') {
-					grid[row_count][i+1] = 1;
+	string line;
+	cin >> choice;
+	if (choice == 1) {
+		cout << "Put cors now, x to represent live cell, . for dead, - to endup a line" << endl;
+		while (row_count <= maxrow) {
+			cin >> line;
+			if (line.back() == '-') {
+				for (int i = 0; i < line.length(); i++) {
+					if (line[i] == 'x') {
+						grid[row_count][i + 1] = 1;
+					}
 				}
 			}
+			row_count++;
+			line.clear();
 		}
-		row_count++;
-		seq.clear();
+	}
+	else if (choice == 2) {
+		fstream file;
+		string file_name;
+		cout << "Put the file path here: " << flush;
+		cin >> file_name;
+		file.open(file_name, ios::in);
+
+		if (!file.is_open())
+			cout << "Failed to open file" << endl;
+		else {
+			while (getline(file, line)) {
+				if (line[0] == '/')
+					continue;
+				for (int i = 0; i < line.length(); i++) {
+					if (line[i] == 'x') {
+						grid[row_count][i + 1] = 1;
+					}
+				}
+				row_count++;
+			}
+			file.close();
+		}
 	}
 };
 
