@@ -36,6 +36,7 @@ void Life::initialize() {
 
 	// This for dynamically putting the coordinate yourself
 	// x for alive cell and . for dead cell, - to end up a line
+	// The file should begin with a comment indicating the configuration name
 	int choice;
 	cout << "1 to setup cors dynaically, 2 to get from a file" << endl;
 	int row_count = 1;
